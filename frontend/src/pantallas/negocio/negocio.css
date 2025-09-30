@@ -1,0 +1,458 @@
+/* Pantallas de Registro */
+.registro-container {
+    background: #2d1d3d;
+    min-height: 100vh;
+    color: #fff;
+    font-family: 'League Mono', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.registro-header {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    margin-bottom: 2rem;
+    align-items: center;
+}
+
+.registro-title {
+    font-size: 1.5rem;
+    font-weight: normal;
+    margin: 1.5rem 0 1rem 0;
+    color: #fff;
+}
+
+.registro-form {
+    width: 90%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    font-family: 'League Mono';
+    padding-bottom: '1rem';
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.registro-form input,
+.registro-form select {
+    background: #8025ff25;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.id-row,
+.vehiculo-row {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.id-row input {
+    flex: 1;
+}
+
+.id-row select {
+    min-width: 11   0px;
+    width: auto;
+}
+
+
+.volver-btn {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    background: #ff0045;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.volver-btn>img {
+    width: 16px;
+}
+
+.registro-btn {
+    background: #8025ff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+/* Submenú de tipo de documento */
+.tipo-de-documento-row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tipo-de-documento-row select {
+    background: #8025ff25;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+}
+
+.tipo-de-documento-row select option {
+    background: #4a2d5a;
+    color: #ffffff;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.tipo-de-documento-row select option:hover {
+    background: #8025ff;
+    color: #ffffff;
+}
+
+.tipo-de-documento-row select option:checked {
+    background: #8025ff;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.tipo-de-documento-select {
+    background: #8025ff25;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    min-width: 96px;
+    text-align: center;
+}
+
+.tipo-de-documento-select:focus {
+    outline: none;
+    background: #8025ff35;
+}
+
+.tipo-de-documento-select option {
+    background: #4a2d5a;
+    color: #ffffff;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.tipo-de-documento-select option:hover {
+    background: #8025ff;
+    color: #ffffff;
+}
+
+.tipo-de-documento-select option:checked {
+    background: #8025ff;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Estilos para el modal de información del negocio */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.negocio-modal {
+    background: #2d1d3d;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 2px solid #8025ff;
+}
+
+.document-modal {
+    background: #2d1d3d;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 2px solid #8025ff;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #8025ff25;
+}
+
+.modal-header h3 {
+    color: #fff;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.cerrar-btn {
+    background: #ff0045;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    padding: 1.5rem;
+}
+
+  .modal-content input,
+  .modal-content select {
+    background: #8025ff25;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .modal-content input[placeholder="PLACA"] {
+    font-family: 'League Mono', monospace;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+
+.tipo-row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tipo-row select {
+    background: #8025ff25;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+}
+
+.tipo-row select option {
+    background: #4a2d5a;
+    color: #ffffff;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.tipo-row select option:hover {
+    background: #8025ff;
+    color: #ffffff;
+}
+
+.tipo-row select option:checked {
+    background: #8025ff;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Estilos específicos para el campo de información del negocio - Exacto a la imagen */
+.negocio-info-row {
+    display: flex;
+    gap: 0.5rem;    
+    align-items: center;
+}
+
+.negocio-info-input {
+    background: #8025ff25;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    flex: 1;
+    cursor: pointer;
+}
+
+.negocio-info-input:focus {
+    outline: none;
+    background: #8025ff35;
+}
+
+.negocio-info-btn {
+    background: #8025ff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0 1rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    height: 100%;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.negocio-info-btn:hover {
+    background: #6a1fd9;
+}
+
+
+/* Estilos específicos para el campo de documento de identidad */
+.document-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .document-input {
+    background: #8025ff25;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    flex: 1;
+    cursor: pointer;
+  }
+  
+  .document-input:focus {
+    outline: none;
+    background: #8025ff35;
+  }
+  
+  .document-btn {
+    background: #8025ff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0 1rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    height: 100%;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .document-btn:hover {
+    background: #6a1fd9;
+  }
+  
+  /* Estilos mejorados para las opciones de los selects en modales */
+  .modal-content select option {
+    background: #4a2d5a;
+    color: #ffffff;
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .modal-content select option:hover {
+    background: #8025ff;
+    color: #ffffff;
+  }
+  
+  .modal-content select option:checked {
+    background: #8025ff;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
+  .modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .guardar-btn {
+    background: #8025ff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    flex: 1;
+  }
+  
+  .cancelar-btn {
+    background: #ff0045;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    flex: 1;
+  }
+  
+  .guardar-btn:hover {
+    background: #6a1fd9;
+  }
+  
+  .cancel-btn:hover {
+    background: #e55a2b;
+  }
+
+  .tipo-row select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 15px) center;
+    background-size: 16px;
+    padding-right: 40px;
+  }
+
+  .registro-form select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 15px) center;
+    background-size: 16px;
+    padding-right: 40px;
+  }
+    

@@ -1,0 +1,20 @@
+.App {
+  text-align: center;
+  padding: 20px;
+  font-family: 'League Mono', monospace;
+  letter-spacing: 0.5px;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+p {
+  color: #666;
+  font-size: 18px;
+  line-height: 1.6;
+}

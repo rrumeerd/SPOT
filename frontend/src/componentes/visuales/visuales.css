@@ -1,0 +1,32 @@
+/* Logotipo */
+.logotipo {
+    position: relative;
+    font-family: 'Impact', sans-serif;
+    left: 15%;
+    text-align: center;
+    width: 75%;
+    margin-bottom: 1rem;
+    margin-left: -2rem;
+}
+
+.logotipo > h1 {
+    color: #ff0045;
+    font-size: 2.8rem;
+    margin: 0;
+    letter-spacing: 2px;
+    display: inline-block;
+}
+
+.logotipo > span {
+    color: #acacac;
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+    vertical-align: super;
+}
+
+.logotipo > div { 
+    color: #fff;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    letter-spacing: 1px;
+}
