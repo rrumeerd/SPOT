@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useUsuario } from "../contextos/contextodeUsuario.jsx";
 import { useState } from "react";
 import Logotipo from "../componentes/visuales/logotipo.jsx";
+import Volver from "../componentes/funcionales/botones/volver.jsx";
 import './pantallas.css';
 
 function IniciodeSesion() {
@@ -42,7 +43,7 @@ function IniciodeSesion() {
   return (
     <div className="inicio-de-sesion-container">
       <header className="inicio-de-sesion-header">
-        <button className="volver-btn" onClick={() => navigate('/')}>{<img src="/recursos/iconos/volver.png" alt="" />} VOLVER</button>
+        <Volver />
         <Logotipo />
       </header>
       <h1 className="inicio-de-sesion-title">¡INICIA SESIÓN EN TU CUENTA!</h1>

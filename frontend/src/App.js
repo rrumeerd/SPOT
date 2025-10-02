@@ -3,14 +3,19 @@ import './App.css';
 import { BrowserRouter as Router, Routes as Rutas, Route as Ruta } from 'react-router-dom';
 import { ProveedordeUsuario } from './contextos/contextodeUsuario';
 import Bienvenida from './pantallas/bienvenida';
-import Inicio from './pantallas/inicio';
-import Registro from './pantallas/registro';
 import IniciodeSesion from './pantallas/iniciodeSesion';
 
 /* CLiente */
 import Mapa from './pantallas/cliente/mapa';
-import Usuario from './pantallas/cliente/usuario'
 import Vehiculos from './pantallas/cliente/vehiculos';
+
+/* Compartidas */
+import Registro from './pantallas/compartidas/registro';
+import Inicio from './pantallas/compartidas/inicio';
+import Perfil from './pantallas/compartidas/perfil';
+import Configuracion from './pantallas/configuracion';
+import Soporte from './pantallas/soporte';
+
 
 /* Negocio */
 import BasedeDatos from './pantallas/negocio/basedeDatos';
@@ -29,7 +34,9 @@ function App() {
           <Ruta path='/basededatos' element={<BasedeDatos />}></Ruta>
           <Ruta path='/vehiculos' element={<Vehiculos />}></Ruta>
           <Ruta path='/negocios' element={<Negocios />}></Ruta>
-          <Ruta path='/usuario' element={<Usuario />}></Ruta>
+          <Ruta path='/perfil' element={<Perfil />}></Ruta>
+          <Ruta path='/configuracion' element={<Configuracion />}></Ruta>
+          <Ruta path='/soporte' element={<Soporte />}></Ruta>
         </Rutas>
       </Router>
     </ProveedordeUsuario>

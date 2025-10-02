@@ -17,6 +17,7 @@ function RegistrodeCliente() {
     confirmPassword: ''
   });
   const [InformaciondeVehiculo, setInformaciondeVehiculo] = useState({
+    alias: '',
     brand: '',
     model: '',
     year: '',
@@ -232,6 +233,12 @@ function RegistrodeCliente() {
             <div className="modal-content">
               <input
                 type="text"
+                placeholder="ALIAS (opcional)"
+                value={InformaciondeVehiculo.alias}
+                onChange={(e) => handleCambiarInformaciondeVehiculo('alias', e.target.value)}
+              />
+              <input
+                type="text"
                 placeholder="MARCA"
                 value={InformaciondeVehiculo.brand}
                 onChange={(e) => handleCambiarInformaciondeVehiculo('brand', e.target.value)}
@@ -260,8 +267,8 @@ function RegistrodeCliente() {
                   value={InformaciondeVehiculo.type}
                   onChange={(e) => handleCambiarInformaciondeVehiculo('type', e.target.value)}
                 >
-                  <option value="moto">Moto</option>
                   <option value="carro">Carro</option>
+                  <option value="moto">Moto</option>
                   <option value="camioneta">Camioneta</option>
                   <option value="camión">Camión</option>
                 </select>

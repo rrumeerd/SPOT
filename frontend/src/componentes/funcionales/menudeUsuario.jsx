@@ -10,7 +10,6 @@ function MenudeUsuario() {
   const { TipodeUsuario, clearUsuario } = useUsuario();
   const menuRef = useRef(null);
 
-  // Cerrar menú al hacer clic fuera
   useEffect(() => {
     function handleClickOutside(event) {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -61,18 +60,12 @@ function MenudeUsuario() {
           </div>
 
           <div className="menu-de-usuario-options">
-            <button className="menu-de-usuario-option" onClick={() => navigate('/usuario')}>
+            <button className="menu-de-usuario-option" onClick={() => navigate('/perfil')}>
               <img src="/recursos/iconos/usuario.png" alt="Perfil"/>
               <span>Mi Perfil</span>
             </button>
-            
-            <button className="menu-de-usuario-option" onClick={() => navigate('/ubicaciones')}>
-              <img src="/recursos/iconos/aguja.png" alt="Ubicación"/>
-              <span>Ubicaciones Guardadas</span>
-            </button>
-            
             <button className="menu-de-usuario-option" onClick={() => navigate('/configuracion')}>
-              <img src="/recursos/iconos/mas.png" alt="Configuración"/>
+              <img src="/recu rsos/iconos/mas.png" alt="Configuración"/>
               <span>Configuración</span>
             </button>
             

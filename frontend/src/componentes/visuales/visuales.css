@@ -2,11 +2,9 @@
 .logotipo {
     position: relative;
     font-family: 'Impact', sans-serif;
-    left: 15%;
     text-align: center;
-    width: 75%;
-    margin-bottom: 1rem;
-    margin-left: -2rem;
+    width: 50%;
+    margin: 0 auto 1rem auto;
 }
 
 .logotipo > h1 {
@@ -29,4 +27,46 @@
     font-size: 1.1rem;
     margin-top: 0.5rem;
     letter-spacing: 1px;
+}
+
+/* Pop-up de Términos */
+.overlay-terminos {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup-terminos {
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    background: #2d1d3d;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.popup-terminos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: #8025ff;
+    color: #fff;
+}
+
+.popup-terminos-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.popup-terminos-body {
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+    color: #fff;
 }

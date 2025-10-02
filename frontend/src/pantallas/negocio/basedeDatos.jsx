@@ -7,25 +7,24 @@ import './negocio.css';
 
 function BasedeDatos() {
   const navigate = useNavigate();
-  const { userType } = useUsuario();
+  const { TipodeUsuario } = useUsuario();
 
   // Si no es un negocio, redirigir a la pantalla principal
-  if (userType !== 'business') {
+  if (TipodeUsuario !== 'negocio') {
     navigate('/');
     return null;
   }
 
   return (
-    <div className="home-container" style={{ background: "#2d1d3d", minHeight: "100vh", color: "#fff", fontFamily: "Impact, sans-serif", paddingBottom: "4.5rem" }}>
+    <div className="inicio-container">
 
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1rem" }}>
+      <div className="inicio-header">
         <LogotipodeNegocio />
         <MenudeUsuario />
       </div>
 
-      {/* Título de la base de datos */}
-      <div style={{ textAlign: "center", margin: "2rem 1rem" }}>
-        <h1 style={{ fontSize: "2rem", marginBottom: "1rem", letterSpacing: "2px" }}>BASE DE DATOS</h1>
+      <div className="inicio-content">
+        <h1 className="inicio-title">BASE DE DATOS</h1>
         <p style={{ fontSize: "1.1rem", color: "#e0e0e0", letterSpacing: "1px" }}>
           Gestión completa de clientes y servicios
         </p>
@@ -34,17 +33,17 @@ function BasedeDatos() {
       {/* Estadísticas generales */}
       <div style={{ display: "flex", justifyContent: "center", gap: "2.5rem", margin: "2rem 0" }}>
         <div style={{ textAlign: "center" }}>
-          <img src="/icons/user.png" alt="Clientes" style={{ width: 80, marginBottom: "0.5rem" }} />
+          <img src="/recursos/iconos/usuario.png" alt="Clientes" style={{ width: 80, marginBottom: "0.5rem" }} />
           <div style={{ fontSize: "1.3rem" }}>156</div>
           <div style={{ fontSize: "1.1rem" }}>clientes totales</div>
         </div>
         <div style={{ textAlign: "center" }}>
-          <img src="/icons/payment.png" alt="Servicios" style={{ width: 80, marginBottom: "0.5rem" }} />
+          <img src="/recursos/iconos/gas.png" alt="Servicios" style={{ width: 80, marginBottom: "0.5rem" }} />
           <div style={{ fontSize: "1.3rem" }}>89</div>
           <div style={{ fontSize: "1.1rem" }}>servicios este mes</div>
         </div>
         <div style={{ textAlign: "center" }}>
-          <img src="/icons/fuel.png" alt="Ingresos" style={{ width: 80, marginBottom: "0.5rem" }} />
+          <img src="/recursos/iconos/pago.png" alt="Ingresos" style={{ width: 80, marginBottom: "0.5rem" }} />
           <div style={{ fontSize: "1.3rem" }}>$8.2M</div>
           <div style={{ fontSize: "1.1rem" }}>ingresos totales</div>
         </div>
@@ -54,7 +53,7 @@ function BasedeDatos() {
       <div className="home-box">
         <div style={{ display: "flex", alignItems: "center", marginBottom: "0.7rem" }}>
           <span style={{ fontSize: "1.3rem", letterSpacing: "1px" }}>GESTIÓN DE CLIENTES</span>
-          <img src="/icons/user.png" alt="Clientes" style={{ width: 28, marginLeft: "0.7rem" }} />
+          <img src="/recursos/iconos/usuario.png" alt="Clientes" style={{ width: 28, marginLeft: "0.7rem" }} />
         </div>
         <div style={{
           background: "#7c3aed",
@@ -69,7 +68,7 @@ function BasedeDatos() {
             <div style={{ fontSize: "1.1rem" }}>BUSCAR CLIENTE</div>
             <div style={{ fontSize: "0.95rem", color: "#e0e0e0", marginBottom: "0.3rem" }}>Buscar por nombre, placa o documento</div>
           </div>
-          <img src="/icons/arrow-right.png" alt="Ver más" style={{ width: 28 }} />
+          <img src="/recursos/iconos/continuar.png" alt="Ver más" style={{ width: 28 }} />
         </div>
         <div style={{
           background: "#7c3aed",
@@ -84,7 +83,7 @@ function BasedeDatos() {
             <div style={{ fontSize: "1.1rem" }}>HISTORIAL DE SERVICIOS</div>
             <div style={{ fontSize: "0.95rem", color: "#e0e0e0", marginBottom: "0.3rem" }}>Ver todos los servicios realizados</div>
           </div>
-          <img src="/icons/arrow-right.png" alt="Ver más" style={{ width: 28 }} />
+          <img src="/recursos/iconos/continuar.png" alt="Ver más" style={{ width: 28 }} />
         </div>
         <div style={{
           background: "#7c3aed",
@@ -98,14 +97,15 @@ function BasedeDatos() {
             <div style={{ fontSize: "1.1rem" }}>AGREGAR NUEVO CLIENTE</div>
             <div style={{ fontSize: "0.95rem", color: "#e0e0e0", marginBottom: "0.3rem" }}>Registrar cliente en la base de datos</div>
           </div>
-          <img src="/icons/arrow-right.png" alt="Ver más" style={{ width: 28 }} />
+          <img src="/recursos/iconos/continuar.png" alt="Ver más" style={{ width: 28 }} />
         </div>
       </div>
+      <br/>
 
       <div className="home-box">
         <div style={{ display: "flex", alignItems: "center", marginBottom: "0.7rem" }}>
           <span style={{ fontSize: "1.3rem", letterSpacing: "1px" }}>REPORTES Y ANÁLISIS</span>
-          <img src="/icons/add.png" alt="Reportes" style={{ width: 28, marginLeft: "0.7rem" }} />
+          <img src="/recursos/iconos/lupa.png" alt="Reportes" style={{ width: 28, marginLeft: "0.7rem" }} />
         </div>
         <div style={{
           background: "#7c3aed",
@@ -120,7 +120,7 @@ function BasedeDatos() {
             <div style={{ fontSize: "1.1rem" }}>INGRESOS MENSUALES</div>
             <div style={{ fontSize: "0.95rem", color: "#e0e0e0", marginBottom: "0.3rem" }}>Análisis de ingresos por período</div>
           </div>
-          <img src="/icons/arrow-right.png" alt="Ver más" style={{ width: 28 }} />
+          <img src="/recursos/iconos/continuar.png" alt="Ver más" style={{ width: 28 }} />
         </div>
         <div style={{
           background: "#7c3aed",
@@ -134,7 +134,7 @@ function BasedeDatos() {
             <div style={{ fontSize: "1.1rem" }}>SERVICIOS MÁS POPULARES</div>
             <div style={{ fontSize: "0.95rem", color: "#e0e0e0", marginBottom: "0.3rem" }}>Estadísticas de servicios solicitados</div>
           </div>
-          <img src="/icons/arrow-right.png" alt="Ver más" style={{ width: 28 }} />
+          <img src="/recursos/iconos/continuar.png" alt="Ver más" style={{ width: 28 }} />
         </div>
       </div>
 

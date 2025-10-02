@@ -1,0 +1,110 @@
+/* Ingresos */
+.en-espera-section {
+    margin-bottom: 1rem;
+  }
+  
+  .en-espera-section h4 {
+    margin-bottom: 1rem;
+    color: #8025ff;
+  }
+  
+  .en-espera-item {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+  
+  .en-espera-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+  }
+  
+  .cliente-info {
+    flex: 1;
+    margin-right: 1rem;
+  }
+  
+  .cliente-info > div:first-child {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  
+  .cliente-info > div:nth-child(2) {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .cliente-info > div:nth-child(3) {
+    font-size: 0.8rem;
+    color: #888;
+  }
+  
+  .en-espera-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 150px;
+  }
+  
+  .motivo-input {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background: #fff;
+    color: #333;
+    font-family: League Mono, monospace;
+  }
+  
+  .motivo-input:focus {
+    outline: none;
+    border-color: #8025ff;
+    box-shadow: 0 0 0 2px rgba(128, 37, 255, 0.2);
+  }
+  
+  .asignar-btn {
+    background: #8025ff;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .asignar-btn:hover {
+    background: #6b1fd9;
+    transform: translateY(-1px);
+  }
+  
+  .en-espera-stats {
+    border-top: 1px solid #e9ecef;
+    padding-top: 1rem;
+  }
+  
+  .en-espera-stats > div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+  }
+  
+  .en-espera-stats span {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .en-espera-stats strong {
+    color: #8025ff;
+  }
+  

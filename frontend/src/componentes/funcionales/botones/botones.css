@@ -1,0 +1,18 @@
+/* Volver */
+.volver-btn {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    background: #ff0045;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.volver-btn>img {
+    width: 16px;
+}

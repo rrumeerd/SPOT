@@ -56,7 +56,7 @@
 
 .usuario-info {
   background: #8025ff;
-  border-radius: 5%;
+  border-radius: 32px;
   padding: 0.5rem;
   display: flex;
   align-items: center;
@@ -122,8 +122,8 @@
 
 .menu-de-usuario-divider {
   height: 1px;
-  background: #e0e0e0;
-  margin: 0.5rem 0;
+  background: #2d1d3d;
+  margin: 0.5rem 0 #8025ff;
 }
 
 .cerrar-sesion-option {
@@ -141,7 +141,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background: #421f6e;
+  background-color: #8025ff75;
   display: flex;
   justify-content: space-around;
   align-items: center;

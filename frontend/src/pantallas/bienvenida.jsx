@@ -1,22 +1,22 @@
 import Logotipo from '../componentes/visuales/logotipo';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
+import Terminos from '../componentes/visuales/terminos.jsx';
 import TipodeRegistro from '../componentes/funcionales/tipodeRegistro.jsx';
 import './pantallas.css';
 
 function Bienvenida() {
     const navigate = useNavigate();
     const [mostrarTipoRegistro, setMostrarTipoRegistro] = useState(false);
+    const [mostrarTerminos, setMostrarTerminos] = useState(false);
 
     return (
         <>
         <div className="bienvenida-container">
-
-            <Logotipo />
-
             <div className='bienvenida-header'>
+            <Logotipo />
                 <h2 className='bienvenida-title'>¡BIENVENIDO A SPOT!</h2>
-                <p className='bienvenida-subtitle'>Por favor, lee nuestras <a href="/terminos">condiciones y políticas de privacidad. </a></p>
+                <p className='bienvenida-subtitle'>Por favor, lee nuestros <a href='terminos' onClick={(e) => { e.preventDefault(); setMostrarTerminos(true); }}>términos y políticas de privacidad. </a></p>
             </div>
 
             <h1 className="bienvenida-comenzar-title">¡CREA UNA CUENTA AHORA!</h1>
@@ -53,6 +53,19 @@ function Bienvenida() {
         </div>
         {mostrarTipoRegistro && (
             <TipodeRegistro onClose={() => setMostrarTipoRegistro(false)} />
+        )}
+        {mostrarTerminos && (
+            <div className="overlay-terminos" onClick={() => setMostrarTerminos(false)}>
+                <div className="popup-terminos" onClick={(e) => e.stopPropagation()}>
+                    <div className="popup-terminos-header">
+                        <h3>Términos y Políticas de Privacidad</h3>
+                        <button className="cerrar-btn" onClick={() => setMostrarTerminos(false)}>×</button>
+                    </div>
+                    <div className="popup-terminos-body">
+                        <Terminos />
+                    </div>
+                </div>
+            </div>
         )}
         </>
     );
