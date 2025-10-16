@@ -9,35 +9,69 @@ function IniciodeSesion() {
   const navigate = useNavigate();
   const { updateTipodeUsuario, updateDatosdeUsuario } = useUsuario();
   const [DatosdeFormulario, setDatosdeFormulario] = useState({
-    documentNumber: '',
-    documentType: 'C.C.',
     email: '',
     password: ''
   });
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleCambiodeFormulario = (field, value) => {
     setDatosdeFormulario(prev => ({
       ...prev,
       [field]: value
     }));
+    // Limpiar mensaje de error cuando el usuario empiece a escribir
+    if (errorMessage) {
+      setErrorMessage('');
+    }
   };
 
-  const handleEnviar = (e) => {
+  const handleEnviar = async (e) => {
     e.preventDefault();
 
+    // Limpiar mensaje de error anterior
+    setErrorMessage('');
 
-    const DatosdeUsuario = {
-      documentNumber: DatosdeFormulario.documentNumber,
-      documentType: DatosdeFormulario.documentType,
-      email: DatosdeFormulario.email,
-      TipodeUsuario: 'cliente',
-      loginDate: new Date().toISOString()
-    };
+    try {
+      const response = await fetch('http://localhost:4000/usuarios/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify({
+          Correo: DatosdeFormulario.email, 
+          Contrasena: DatosdeFormulario.password
+        }),
+      });
 
-    updateDatosdeUsuario(DatosdeUsuario);
-    updateTipodeUsuario('cliente');
+      if (!response.ok) {
+        const errorData = await response.json();
+        if (errorData.error === 'correo_no_existe' || errorData.error === 'contraseña_incorrecta') {
+          setErrorMessage(errorData.mensaje);
+          return;
+        }
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-    navigate('/inicio');
+      const data = await response.json();
+      
+      // Actualizar el contexto con los datos del usuario
+      const DatosdeUsuario = {
+        ID_usuario: data.usuario.ID_usuario,
+        email: data.usuario.Correo,
+        Nombre: data.usuario.Nombre,
+        TipodeUsuario: 'cliente',
+        loginDate: new Date().toISOString()
+      };
+
+      updateDatosdeUsuario(DatosdeUsuario);
+      updateTipodeUsuario('cliente');
+      
+      console.log('Login exitoso:', data);
+      navigate('/inicio');
+    } catch (error) {
+      console.error('Error en login:', error);
+      setErrorMessage('Error de conexión. Intenta nuevamente.');
+    }
   };
 
   return (
@@ -49,25 +83,6 @@ function IniciodeSesion() {
       <h1 className="inicio-de-sesion-title">¡INICIA SESIÓN EN TU CUENTA!</h1>
 
       <form className="inicio-de-sesion-form" onSubmit={handleEnviar}>
-        <div className="id-row">
-          <input
-            type="number"
-            placeholder="IDENTIFICACIÓN"
-            value={DatosdeFormulario.documentNumber}
-            onChange={(e) => handleCambiodeFormulario('documentNumber', e.target.value)}
-            min="1000000"
-            max="1999999999"
-            required
-          />
-          <select
-            className="tipo-de-documento-select"
-            value={DatosdeFormulario.documentType}
-            onChange={(e) => handleCambiodeFormulario('documentType', e.target.value)}
-          >
-            <option value="C.C.">C.C.</option>
-            <option value="C.E.">C.E.</option>
-          </select>
-        </div>
         <input
           type="email"
           placeholder="CORREO ELECTRÓNICO"
@@ -83,6 +98,13 @@ function IniciodeSesion() {
           onChange={(e) => handleCambiodeFormulario('password', e.target.value)}
           required
         />
+        
+        {errorMessage && (
+          <div className="error-message" style={{ color: '#ff0045', textAlign: 'center', marginBottom: '1rem', fontSize: '0.9rem' }}>
+            {errorMessage}
+          </div>
+        )}
+        
         <button type="submit" className="inicio-de-sesion-btn">INICIAR SESIÓN</button>
       </form>
     </div>

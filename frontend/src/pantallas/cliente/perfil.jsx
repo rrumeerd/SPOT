@@ -2,18 +2,43 @@ import Logotipo from "../../componentes/visuales/logotipo.jsx";
 import MenudeUsuario from "../../componentes/funcionales/menudeUsuario.jsx";
 import MenuInferior from "../../componentes/funcionales/menuInferior.jsx";
 import { useUsuario } from "../../contextos/contextodeUsuario.jsx";
+import { useState, useEffect } from "react";
 import './cliente.css';
 
 function PerfildeCliente() {
   const { DatosdeUsuario } = useUsuario();
-  const nombreUsuario = DatosdeUsuario?.fullName || 'Usuario';
+  const [vehiculoFavorito, setVehiculoFavorito] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const nombreUsuario = DatosdeUsuario?.Nombre || DatosdeUsuario?.fullName || 'Usuario';
+
+  useEffect(() => {
+    if (DatosdeUsuario?.ID_usuario) {
+      cargarVehiculoFavorito();
+    }
+  }, [DatosdeUsuario?.ID_usuario]);
+
+  const cargarVehiculoFavorito = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`http://localhost:4000/vehiculos/user/${DatosdeUsuario.ID_usuario}`);
+      if (response.ok) {
+        const vehiculos = await response.json();
+        if (vehiculos.length > 0) {
+          setVehiculoFavorito(vehiculos[0]);
+        }
+      }
+    } catch (error) {
+      console.error('Error al cargar vehículo favorito:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const vehiculoFav = (() => {
-    const v = DatosdeUsuario?.InformaciondeVehiculo;
-    if (!v) return '—';
-    if (v.alias) return v.alias;
-    const modelText = v.model ? ` ${v.model}` : '';
-    const plateText = v.plate ? ` ${v.plate.toUpperCase()}` : '';
-    return `${v.brand || ''}${modelText}${plateText}`.trim() || '—';
+    if (loading) return 'Cargando...';
+    if (!vehiculoFavorito) return 'Sin vehículo registrado';
+    return `${vehiculoFavorito.Modelo} - ${vehiculoFavorito.Matricula}`;
   })();
   return (
     <div className="usuario-container">

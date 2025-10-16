@@ -1,20 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useUsuario } from "../../contextos/contextodeUsuario";
 import './funcionales.css';
 
 function Saludo({ estilo }) {
-  const { DatosdeUsuario } = useUsuario();
+  const { DatosdeUsuario, TipodeUsuario } = useUsuario();
+  const [vehiculoFavorito, setVehiculoFavorito] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // Si no hay datos del usuario, no mostrar nada
   if (!DatosdeUsuario) {
     return null;
   }
 
-  const NombredeUsuario = DatosdeUsuario.NombreCompleto || DatosdeUsuario.NombredeNegocio || 'Usuario';
+  // Cargar vehículo favorito para clientes
+  useEffect(() => {
+    if (TipodeUsuario === 'cliente' && DatosdeUsuario?.ID_usuario) {
+      cargarVehiculoFavorito();
+    }
+  }, [DatosdeUsuario?.ID_usuario, TipodeUsuario]);
 
-  const InformaciondeVehiculo = DatosdeUsuario.InformaciondeVehiculo;
+  const cargarVehiculoFavorito = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`http://localhost:4000/vehiculos/user/${DatosdeUsuario.ID_usuario}`);
+      if (response.ok) {
+        const vehiculos = await response.json();
+        // Tomar el primer vehículo como favorito (o implementar lógica más sofisticada)
+        if (vehiculos.length > 0) {
+          setVehiculoFavorito(vehiculos[0]);
+        }
+      }
+    } catch (error) {
+      console.error('Error al cargar vehículo favorito:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const TipodeUsuario = DatosdeUsuario.TipodeUsuario || 'cliente';
+  const NombredeUsuario = DatosdeUsuario.Nombre || DatosdeUsuario.fullName || DatosdeUsuario.NombredeNegocio || 'Usuario';
 
   if (TipodeUsuario === 'negocio') {
     return (
@@ -63,20 +86,44 @@ function Saludo({ estilo }) {
         </p>
       </div>
 
-      {/* Mostrar información del vehículo solo para clientes */}
-      {InformaciondeVehiculo && (
+      {/* Mostrar información del vehículo favorito solo para clientes */}
+      {loading ? (
+        <div className="info-card">
+          <div className="info-icon">
+            <img src="/recursos/iconos/auto.png" alt="Vehículo" />
+          </div>
+          <div className="info-details">
+            <div className="info-title">Cargando vehículo...</div>
+          </div>
+        </div>
+      ) : vehiculoFavorito ? (
         <div className="info-card">
           <div className="info-icon">
             <img
-              src={InformaciondeVehiculo.tipo === 'moto' ? "/recursos/iconos/moto.png" : "/recursos/iconos/auto.png"} alt="Vehículo" />
+              src={vehiculoFavorito.Tipo_vehiculo === 'moto' ? "/recursos/iconos/moto.png" : "/recursos/iconos/auto.png"} 
+              alt="Vehículo" 
+            />
           </div>
           <div className="info-details">
             <div className="info-title">
-              {InformaciondeVehiculo.marca} {InformaciondeVehiculo.modelo}
+              {vehiculoFavorito.Modelo}
             </div>
             <div className="info-subtitle">
-              {InformaciondeVehiculo.placa}
+              {vehiculoFavorito.Matricula}
             </div>
+            <div className="info-additional">
+              {vehiculoFavorito.Tipo_vehiculo?.charAt(0).toUpperCase() + vehiculoFavorito.Tipo_vehiculo?.slice(1)}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="info-card">
+          <div className="info-icon">
+            <img src="/recursos/iconos/auto.png" alt="Vehículo" />
+          </div>
+          <div className="info-details">
+            <div className="info-title">No tienes vehículos registrados</div>
+            <div className="info-subtitle">Agrega tu primer vehículo</div>
           </div>
         </div>
       )}

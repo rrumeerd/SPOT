@@ -24,6 +24,34 @@ router.get('/:ID_historial_Cliente', (req, res) =>{
     });
 });
 
+router.get('/usuario/:ID_usuario', (req, res) =>{
+    const {ID_usuario} = req.params;
+    mysqlConnection.query(`
+        SELECT 
+            hc.*,
+            v.Modelo as Vehiculo_Modelo,
+            v.Matricula as Vehiculo_Matricula,
+            v.Tipo_vehiculo as Vehiculo_Tipo,
+            n.Nombre as Negocio_Nombre,
+            n.Tipo_negocio as Negocio_Tipo,
+            ts.Nombre_servicio as Servicio_Nombre,
+            ts.Tarifa as Servicio_Tarifa
+        FROM historial_cliente hc
+        LEFT JOIN vehiculo v ON hc.ID_vehiculo = v.ID_vehiculo
+        LEFT JOIN negocio n ON hc.ID_negocio = n.ID_negocio
+        LEFT JOIN tipo_servicio ts ON hc.ID_servicio = ts.ID_servicio
+        WHERE hc.ID_usuario = ? 
+        ORDER BY hc.Hora_entrada DESC
+    `, [ID_usuario], (err, rows, fields) => {
+        if (err) {
+            console.error('Error en la consulta', err);
+            res.status(500).json({error: 'Hubo un error al mostrar el historial del usuario', detalle:err});
+        }else {
+            res.json(rows);
+        }
+    });
+});
+
 router.post('/', (req, res) => {
     const { ID_historial_Cliente, ID_negocio, Hora_entrada, Hora_salida} = req.body;
     mysqlConnection.query(

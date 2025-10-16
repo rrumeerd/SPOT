@@ -34,9 +34,10 @@ function Configuracion() {
                     <section className="config-section">
                         <h2>Información personal</h2>
                         <div className="config-section-content">
-                            <div>Nombre: {DatosdeUsuario?.nombre || '—'}</div>
-                            <div>Email: {DatosdeUsuario?.email || '—'}</div>
+                            <div>Nombre: {DatosdeUsuario?.Nombre || DatosdeUsuario?.fullName || '—'}</div>
+                            <div>Email: {DatosdeUsuario?.email || DatosdeUsuario?.Correo || '—'}</div>
                             <div>Tipo de cuenta: {TipodeUsuario || '—'}</div>
+                            {DatosdeUsuario?.Telefono && <div>Teléfono: {DatosdeUsuario.Telefono}</div>}
                         </div>
                     </section>
 

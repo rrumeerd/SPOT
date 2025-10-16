@@ -2,9 +2,16 @@ import MenuInferior from "../../componentes/funcionales/menuInferior";
 import MenudeUsuario from "../../componentes/funcionales/menudeUsuario";
 import Saludo from "../../componentes/funcionales/saludo";
 import Logotipo from "../../componentes/visuales/logotipo";
+import { useNavigate } from 'react-router-dom';
 import './cliente.css'
 
 function IniciodeCliente() {
+    const navigate = useNavigate();
+
+    const irAMovimientos = () => {
+        navigate('/movimientos');
+    };
+
     return (
         <div className="inicio-container">
 
@@ -28,7 +35,7 @@ function IniciodeCliente() {
                 </div>
             </div>
 
-            <div className="inicio-box">
+            <div className="inicio-box" onClick={irAMovimientos} style={{cursor: 'pointer'}}>
                 <div className="inicio-box-header">
                     <span>TUS ÚLTIMOS MOVIMIENTOS</span>
                     <img src="/recursos/iconos/pago.png" alt="Movimientos" />
@@ -38,26 +45,9 @@ function IniciodeCliente() {
                 </div>
                 <div className="inicio-cliente-movimiento">
                     Tanqueaste 5 galones de gasolina en tu<b> YAMAHA NMAX 115 </b>en Bomba La Maria exitosamente.
-                    <button className="continuar-btn">
+                    <button className="continuar-btn" onClick={irAMovimientos}>
                         <img src="/recursos/iconos/continuar.png" alt="Ver más" />
                     </button>
-                </div>
-            </div>
-
-            <div className="inicio-box">
-                <div className="inicio-box-header">
-                    <span>TUS VEHÍCULOS</span>
-                    <img src="/recursos/iconos/auto.png" alt="Vehículo" />
-                </div>
-                <div className="inicio-cliente-vehiculo">
-                    <div>
-                        <div>YAMAHA NMAX 115</div>
-                        <div>POP - 69X &nbsp; Medellín</div>
-                    </div>
-                    <div>
-
-                        <div>PARQUEADO<img src="/recursos/iconos/moto.png" alt="Moto" /></div>
-                    </div>
                 </div>
             </div>
 
