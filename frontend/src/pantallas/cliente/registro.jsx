@@ -13,6 +13,7 @@ function RegistrodeCliente() {
     documentNumber: '',
     documentType: 'C.C.',
     email: '',
+    telefono: '',
     password: '',
     confirmPassword: ''
   });
@@ -103,7 +104,7 @@ function RegistrodeCliente() {
     setShowModaldeVehiculo(false);
   };
 
-  const handleEnviar = (e) => {
+  const handleEnviar = async (e) => {
     e.preventDefault();
 
     if (DatosdeFormulario.password !== DatosdeFormulario.confirmPassword) {
@@ -121,11 +122,72 @@ function RegistrodeCliente() {
       TipodeUsuario: 'cliente',
       FechadeRegistro: new Date().toISOString()
     };
-
+    
     updateDatosdeUsuario(DatosdeUsuario);
     updateTipodeUsuario('cliente');
+    try {
+      const response = await fetch('http://localhost:4000/usuarios', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify({
+          Nombre: DatosdeFormulario.fullName,
+          Documento: DatosdeFormulario.documentNumber,
+          Tipo_identificacion: DatosdeFormulario.documentType,
+          Correo: DatosdeFormulario.email,
+          Telefono: DatosdeFormulario.telefono,
+          InformaciondeVehiculo: InformaciondeVehiculo,
+          Tipo_usuario: 'cliente',
+          Contrasena: DatosdeFormulario.password,
+        }),
+      });
 
-    navigate('/inicio');
+      if (!response.ok) {
+        navigate('/registro')
+        throw new Error(`HTTP error! status: ${response.status}`);
+        
+      }
+
+      const data = await response.json();
+      console.log('Usuario creado:', data);
+      
+      // Ahora registrar el vehículo en la base de datos
+      if (InformaciondeVehiculo.brand && InformaciondeVehiculo.plate) {
+        try {
+          const vehiculoResponse = await fetch('http://localhost:4000/vehiculos', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: JSON.stringify({
+              ID_usuario: data.userID,
+              Matricula: InformaciondeVehiculo.plate,
+              Modelo: `${InformaciondeVehiculo.brand} ${InformaciondeVehiculo.model}`,
+              Tipo_vehiculo: InformaciondeVehiculo.type,
+              Historial_cliente: `${InformaciondeVehiculo.alias || 'Sin alias'} - ${InformaciondeVehiculo.year}`
+            }),
+          });
+
+          if (vehiculoResponse.ok) {
+            const vehiculoData = await vehiculoResponse.json();
+            console.log('Vehículo registrado:', vehiculoData);
+          } else {
+            console.error('Error al registrar vehículo');
+          }
+        } catch (vehiculoError) {
+          console.error('Error al registrar vehículo:', vehiculoError);
+        }
+      }
+      
+      navigate('/inicio');
+    } catch (error) {
+      console.error('Error creating post:', error);
+      alert('Error')
+      navigate('/registro')
+    }
+
+    
   };
 
   const getInformaciondeVehiculoDisplay = () => {
@@ -177,6 +239,13 @@ function RegistrodeCliente() {
         </div>
 
         <div className="form-group">
+          <input
+            type="number"
+            placeholder="TELÉFONO"
+            value={DatosdeFormulario.telefono}
+            onChange={(e) => handleCambiodeFormulario('telefono', e.target.value)}
+            required
+          />
           <input
             type="email"
             placeholder="CORREO ELECTRÓNICO"

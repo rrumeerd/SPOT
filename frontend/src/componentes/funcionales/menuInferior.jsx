@@ -1,11 +1,13 @@
-import BotondeTransaccion from "./negocio/ingresos"
 import { useNavigate } from "react-router-dom";
 import { useUsuario } from "../../contextos/contextodeUsuario";
 import './funcionales.css';
+import { useState } from "react";
+import Ingresos from "./negocio/ingresos";
 
 function MenuInferior() {
     const navigate = useNavigate();
     const { TipodeUsuario } = useUsuario();
+    const [showIngresos, setShowIngresos] = useState(false);
 
     return (
         <>
@@ -14,9 +16,10 @@ function MenuInferior() {
                     <img src="/recursos/iconos/inicio.png" alt="Inicio" />
                 </button>
                 {TipodeUsuario === 'negocio' && (
-                    <button onClick={BotondeTransaccion}>
-                        <img src="/recursos/iconos/pago.png" alt="Transacciones en Espera" />
-                    </button>)}
+                    <button onClick={() => setShowIngresos(true)}>
+                    <img src="/recursos/iconos/pago.png" alt="Transacciones en Espera" />
+                </button>)}
+                {showIngresos && <Ingresos onClose={() => setShowIngresos(false)} />}
                 {TipodeUsuario === 'negocio' && (
                     <button onClick={() => navigate('/basededatos')}>
                         <img src="/recursos/iconos/base.png" alt="Base de Datos" />

@@ -1,7 +1,9 @@
 import MenudeUsuario from "../../componentes/funcionales/menudeUsuario.jsx";
 import Logotipo from "../../componentes/visuales/logotipo.jsx";
 import MenuInferior from "../../componentes/funcionales/menuInferior.jsx";
+import MinimapControl from "../../componentes/funcionales/cliente/minimapa.jsx";
 import './cliente.css';
+import { MapContainer, TileLayer } from 'react-leaflet'
 
 function Mapa() {
 
@@ -23,6 +25,13 @@ function Mapa() {
                     </div>
                 </div>
                 <div className="mapa-mapa">
+                    <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+                        <TileLayer
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <MinimapControl position="topright" zoom={5} />
+                    </MapContainer>
                 </div>
                 <div className="mapa-ubicacion-info">
                     <div className="mapa-ubicacion-info-header">

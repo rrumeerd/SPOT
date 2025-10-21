@@ -1,3 +1,4 @@
+// Componente pop-up en perfil de cliente
 import MenuInferior from "../../componentes/funcionales/menuInferior.jsx";
 import Logotipo from "../../componentes/visuales/logotipo.jsx";
 import './cliente.css';

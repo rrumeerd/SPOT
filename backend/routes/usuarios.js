@@ -25,16 +25,17 @@ router.get('/:ID_usuario', (req, res) =>{
 });
 
 router.post('/', (req, res) => {
-    const { ID_usuario, Tipo_identificacion, Nombre, Contraseña, Tipo_usuario, Correo, Telefono} = req.body;
+    const { Tipo_identificacion, Documento, Nombre, Contrasena, Tipo_usuario, Correo, Telefono} = req.body;
+    console.log(req.body)
     mysqlConnection.query(
-        'INSERT INTO usuario (ID_usuario, Tipo_identificacion, Nombre, Contraseña, Tipo_usuario, Correo, Telefono) VALUES (?, ?, ?, ?, ?, ?,?)',
-        [ID_usuario, Tipo_identificacion, Nombre, Contraseña, Tipo_usuario, Correo, Telefono],
-        (err) => {
+        'INSERT INTO usuario ( Tipo_identificacion, Documento, Nombre, Contrasena, Tipo_usuario, Correo, Telefono) VALUES (?, ?, ?, ?, ?, ?,?)',
+        [ Tipo_identificacion, Documento, Nombre, Contrasena, Tipo_usuario, Correo, Telefono],
+        (err,  result) => {
             if (err) {
                 console.error('Error al agregar usuario', err);
                 res.status(500).json({ error: 'No se pudo agregar el usuario', detalle: err });
             } else {
-                res.json({ mensaje: 'Usuario agregado', ID_usuario: ID_usuario });
+                res.json({ mensaje: 'Usuario agregado' , userID: result.insertId});
             }
         }
     );
@@ -42,10 +43,10 @@ router.post('/', (req, res) => {
 
 router.put('/:ID_usuario', (req, res) => {
     const { ID_usuario } = req.params;
-    const { Tipo_identificacion, Nombre, Contraseña, Tipo_usuario, Correo, Telefono } = req.body;
+    const { Tipo_identificacion, Nombre, Contrasena, Tipo_usuario, Correo, Telefono } = req.body;
     mysqlConnection.query(
-        'UPDATE usuario SET Tipo_identificacion=?, Nombre=?, Contraseña=?, Tipo_usuario=?, Correo=?, Telefono=? WHERE ID_usuario=?',
-        [Tipo_identificacion, Nombre, Contraseña, Tipo_usuario, Correo, Telefono, ID_usuario],
+        'UPDATE usuario SET Tipo_identificacion=?, Nombre=?, Contrasena=?, Tipo_usuario=?, Correo=?, Telefono=? WHERE ID_usuario=?',
+        [Tipo_identificacion, Nombre, Contrasena, Tipo_usuario, Correo, Telefono, ID_usuario],
         (err) => {
             if (err) {
                 console.error('Error al actualizar usuario', err);
@@ -69,6 +70,61 @@ router.delete('/:ID_usuario', (req, res) => {
             } else {
                 res.json({ mensaje: 'Usuario eliminado' });
             }
+        }
+    );
+});
+
+// Validar login
+router.post('/login', (req, res) => {
+    const { Correo, Contrasena } = req.body;
+
+    if (!Correo || !Contrasena) {
+        return res.status(400).json({ error: 'Faltan campos requeridos' });
+    }
+
+    // Primero verificar si el correo existe
+    mysqlConnection.query(
+        'SELECT * FROM usuario WHERE Correo = ?',
+        [Correo],
+        (err, rows) => {
+            if (err) {
+                console.error('Error en la consulta', err);
+                return res.status(500).json({ error: 'Error en el servidor', detalle: err });
+            }
+
+            if (rows.length === 0) {
+                // El correo no existe
+                return res.status(401).json({ 
+                    error: 'correo_no_existe',
+                    mensaje: 'Este correo no está alojado en nuestros servidores.'
+                });
+            }
+
+            // El correo existe, ahora verificar la contrasena
+            mysqlConnection.query(
+                'SELECT * FROM usuario WHERE Correo = ? AND Contrasena = ?',
+                [Correo, Contrasena],
+                (err, rows) => {
+                    if (err) {
+                        console.error('Error en la consulta', err);
+                        return res.status(500).json({ error: 'Error en el servidor', detalle: err });
+                    }
+
+                    if (rows.length > 0) {
+                        // Usuario válido
+                        res.json({
+                            mensaje: 'Login exitoso',
+                            usuario: rows[0]
+                        });
+                    } else {
+                        // Contrasena incorrecta
+                        res.status(401).json({ 
+                            error: 'contrasena_incorrecta',
+                            mensaje: 'Contrasena incorrecta.'
+                        });
+                    }
+                }
+            );
         }
     );
 });

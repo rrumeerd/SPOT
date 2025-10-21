@@ -7,7 +7,7 @@ import './funcionales.css';
 function MenudeUsuario() {
   const navigate = useNavigate();
   const [EstaAbierto, setEstaAbierto] = useState(false);
-  const { TipodeUsuario, clearUsuario } = useUsuario();
+  const { TipodeUsuario, DatosdeUsuario, clearUsuario } = useUsuario();
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -49,9 +49,9 @@ function MenudeUsuario() {
               <img src="/recursos/iconos/usuario.png" alt="Avatar"/>
             </div>
             <div className="usuario-info">
-                
               <div className="usuario-nombre">
-                {TipodeUsuario === 'negocio' ? 'negocio' : 'cliente'}
+                {DatosdeUsuario?.Nombre || DatosdeUsuario?.fullName || 
+                 (TipodeUsuario === 'negocio' ? 'Mi Negocio' : 'cliente')}
               </div>
               <div className="tipo-de-usuario">
                 {TipodeUsuario === 'negocio' ? 'Cuenta empresarial' : 'Cuenta personal'}
@@ -65,7 +65,7 @@ function MenudeUsuario() {
               <span>Mi Perfil</span>
             </button>
             <button className="menu-de-usuario-option" onClick={() => navigate('/configuracion')}>
-              <img src="/recu rsos/iconos/mas.png" alt="Configuración"/>
+              <img src="/recursos/iconos/mas.png" alt="Configuración"/>
               <span>Configuración</span>
             </button>
             
@@ -79,7 +79,7 @@ function MenudeUsuario() {
           
           <button className="menu-de-usuario-option cerrar-sesion-option" onClick={handleCerrarSesion}>
             <img src="/recursos/iconos/usuario.png" alt="Cerrar sesión"/>
-            <span>Cerrar Sesión</span>
+            <span><b>Cerrar Sesión</b></span>
           </button>
         </div>
       )}
