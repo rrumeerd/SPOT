@@ -1,3 +1,5 @@
+// Es provicional que sea compartida por negocios y clientes.
+
 import { useNavigate } from "react-router-dom";
 import { useUsuario } from "../contextos/contextodeUsuario.jsx";
 import Logotipo from "../componentes/visuales/logotipo.jsx";

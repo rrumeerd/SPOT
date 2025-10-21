@@ -2,13 +2,14 @@ import Logotipo from "../../componentes/visuales/logotipo.jsx";
 import MenudeUsuario from "../../componentes/funcionales/menudeUsuario.jsx";
 import MenuInferior from "../../componentes/funcionales/menuInferior.jsx";
 import { useState, useEffect } from "react";
-import { useUsuario } from "../../contextos/contextodeUsuario";
+import { useUsuario } from "../../contextos/contextodeUsuario.jsx";
+import { useNavigate } from "react-router-dom";
 import './cliente.css';
 
 function Vehiculos() {
   const { DatosdeUsuario } = useUsuario();
   const [vehiculos, setVehiculos] = useState([]);
-  const [formData, setFormData] = useState({
+  const [datosdeFormulario, setdatosdeFormulario] = useState({
     type: "carro",
     brand: "",
     model: "",
@@ -21,7 +22,6 @@ function Vehiculos() {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // Cargar vehículos del usuario desde la base de datos
   useEffect(() => {
     if (DatosdeUsuario?.ID_usuario) {
       cargarVehiculos();
@@ -47,14 +47,13 @@ function Vehiculos() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Formateo especial para la placa según el tipo (alineado con registro.jsx)
     if (name === 'plate') {
-      const vehicleType = formData.type;
-      const isMotorcycle = vehicleType === 'moto';
+      const tipodeVehiculo = datosdeFormulario.type;
+      const esMoto = tipodeVehiculo === 'moto';
       const cleanValue = value.replace(/[^a-zA-Z0-9]/g, '');
       let formattedValue = '';
 
-      if (isMotorcycle) {
+      if (esMoto) {
         let limitedValue = cleanValue.slice(0, 6);
         let letters = limitedValue.slice(0, 3).replace(/[^a-zA-Z]/g, '').slice(0, 3);
         let numbers = limitedValue.slice(3, 5).replace(/[^0-9]/g, '').slice(0, 2);
@@ -69,21 +68,21 @@ function Vehiculos() {
         formattedValue = combined.length > 3 ? `${combined.slice(0, 3)}-${combined.slice(3)}` : combined;
       }
 
-      setFormData((prev) => ({ ...prev, plate: formattedValue.toUpperCase() }));
+      setdatosdeFormulario((prev) => ({ ...prev, plate: formattedValue.toUpperCase() }));
       return;
     }
 
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setdatosdeFormulario((prev) => ({ ...prev, [name]: value }));
   };
 
   const resetForm = () => {
-    setFormData({ type: "carro", brand: "", model: "", year: "", plate: "", color: "", alias: "" });
+    setdatosdeFormulario({ type: "carro", brand: "", model: "", year: "", plate: "", color: "", alias: "" });
     setEditId(null);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.plate.trim()) return;
+    if (!datosdeFormulario.plate.trim()) return;
 
     try {
       if (editId !== null) {
@@ -94,14 +93,15 @@ function Vehiculos() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            Modelo: `${formData.brand} ${formData.model}`,
-            Tipo_vehiculo: formData.type,
-            Historial_cliente: `${formData.alias || 'Sin alias'} - ${formData.year}`
+            Modelo: `${datosdeFormulario.brand} ${datosdeFormulario.model}`,
+            Tipo_vehiculo: datosdeFormulario.type,
+            year: datosdeFormulario.year,
+            Matricula: datosdeFormulario.plate,
           }),
         });
 
         if (response.ok) {
-          await cargarVehiculos(); // Recargar la lista
+          await cargarVehiculos();
         } else {
           console.error('Error al actualizar vehículo');
         }
@@ -114,10 +114,10 @@ function Vehiculos() {
           },
           body: JSON.stringify({
             ID_usuario: DatosdeUsuario.ID_usuario,
-            Matricula: formData.plate,
-            Modelo: `${formData.brand} ${formData.model}`,
-            Tipo_vehiculo: formData.type,
-            Historial_cliente: `${formData.alias || 'Sin alias'} - ${formData.year}`
+            Matricula: datosdeFormulario.plate,
+            Modelo: `${datosdeFormulario.brand} ${datosdeFormulario.model}`,
+            Tipo_vehiculo: datosdeFormulario.type,
+            year: datosdeFormulario.year
           }),
         });
 
@@ -151,7 +151,7 @@ function Vehiculos() {
     const aliasMatch = historial.match(/^([^-]+)/);
     const alias = aliasMatch ? aliasMatch[1].trim() : '';
 
-    setFormData({ 
+    setdatosdeFormulario({ 
       type: vehiculo.Tipo_vehiculo || 'carro', 
       brand: brand, 
       model: model, 
@@ -186,6 +186,12 @@ function Vehiculos() {
     resetForm();
     setShowModal(false);
   };
+  const { TipodeUsuario } = useUsuario();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (TipodeUsuario === "negocio") navigate("/basededatos", { replace: true });
+  }, [TipodeUsuario, navigate]);
 
   return (
     <div className="vehiculos-container">
@@ -246,7 +252,7 @@ function Vehiculos() {
                     <div className="vehiculos-card-row"><span>Placa:</span> <strong>{v.Matricula}</strong></div>
                     <div className="vehiculos-card-row"><span>Marca:</span> <strong>{brand}</strong></div>
                     <div className="vehiculos-card-row"><span>Modelo:</span> <strong>{model}</strong></div>
-                    <div className="vehiculos-card-row"><span>Año:</span> <strong>{year}</strong></div>
+                    <div className="vehiculos-card-row"><span>Año:</span> <strong>{v.year}</strong></div>
                   </div>
                 </div>
               );
@@ -266,40 +272,40 @@ function Vehiculos() {
                 type="text"
                 placeholder="ALIAS (opcional)"
                 name="alias"
-                value={formData.alias}
+                value={datosdeFormulario.alias}
                 onChange={handleChange}
               />
               <input
                 type="text"
                 placeholder="MARCA"
                 name="brand"
-                value={formData.brand}
+                value={datosdeFormulario.brand}
                 onChange={handleChange}
               />
               <input
                 type="text"
                 placeholder="MODELO"
                 name="model"
-                value={formData.model}
+                value={datosdeFormulario.model}
                 onChange={handleChange}
               />
               <input
                 type="text"
                 placeholder="AÑO"
                 name="year"
-                value={formData.year}
+                value={datosdeFormulario.year}
                 onChange={handleChange}
               />
               <input
                 type="text"
                 placeholder="PLACA"
                 name="plate"
-                value={formData.plate}
+                value={datosdeFormulario.plate}
                 onChange={handleChange}
               />
               SELECCIONE EL TIPO DE VEHÍCULO
               <div className="tipo-row">
-                <select name="type" value={formData.type} onChange={handleChange}>
+                <select name="type" value={datosdeFormulario.type} onChange={handleChange}>
                   <option value="carro">Carro</option>
                   <option value="moto">Moto</option>
                   <option value="camioneta">Camioneta</option>

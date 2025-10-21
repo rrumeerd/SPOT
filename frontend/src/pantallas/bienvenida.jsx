@@ -1,4 +1,4 @@
-import Logotipo from '../componentes/visuales/logotipo';
+import Logotipo from '../componentes/visuales/logotipo.jsx';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import Terminos from '../componentes/visuales/terminos.jsx';

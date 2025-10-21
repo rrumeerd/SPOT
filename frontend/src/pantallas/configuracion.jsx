@@ -1,3 +1,5 @@
+// Es provicional que sea compartida por negocios y clientes.
+
 import Logotipo from "../componentes/visuales/logotipo.jsx";
 import LogotipodeNegocio from "../componentes/visuales/logotipodeNegocio.jsx";
 import Volver from "../componentes/funcionales/botones/volver.jsx";
@@ -37,7 +39,13 @@ function Configuracion() {
                             <div>Nombre: {DatosdeUsuario?.Nombre || DatosdeUsuario?.fullName || '—'}</div>
                             <div>Email: {DatosdeUsuario?.email || DatosdeUsuario?.Correo || '—'}</div>
                             <div>Tipo de cuenta: {TipodeUsuario || '—'}</div>
-                            {DatosdeUsuario?.Telefono && <div>Teléfono: {DatosdeUsuario.Telefono}</div>}
+                            
+                        <div className="config-section-content">
+                            <button className="config-btn" onClick={cambiarTipo}>
+                                <img src="/recursos/iconos/editar.png" alt="Cambiar tipo" />
+                                Cambiar a {TipodeUsuario === 'negocio' ? 'cliente' : 'negocio'}
+                            </button>
+                        </div>
                         </div>
                     </section>
 
@@ -45,36 +53,16 @@ function Configuracion() {
                         <h2>Métodos de inicio de sesión</h2>
                         <div className="config-section-content">
                             <button className="config-btn">
-                                <img src="/recursos/iconos/continuar.png" alt="Agregar" />
-                                Conectar método
+                                <img src="/recursos/iconos/candado.png" alt="Gestionar" />
+                                Gestionar
                             </button>
-                            <button className="config-btn">
-                                <img src="/recursos/iconos/editar.png" alt="Gestionar" />
-                                Gestionar métodos
-                            </button>
-                        </div>
-                    </section>
-
-                    <section className="config-section">
-                        <h2>Cambiar el tipo de cuenta</h2>
-                        <div className="config-section-content">
-                            <button className="config-btn" onClick={cambiarTipo}>
-                                <img src="/recursos/iconos/editar.png" alt="Cambiar tipo" />
-                                Cambiar a {TipodeUsuario === 'negocio' ? 'cliente' : 'negocio'}
-                            </button>
-                        </div>
-                    </section>
-
-                    <section className="config-section">
-                        <h2>Cambiar contraseña</h2>
-                        <div className="config-section-content">
                             <button className="config-btn">
                                 <img src="/recursos/iconos/editar.png" alt="Cambiar contraseña" />
                                 Actualizar contraseña
                             </button>
                         </div>
                     </section>
-
+                    
                     <section className="config-section">
                         <h2>Cerrar cuenta</h2>
                         <div className="config-section-content">

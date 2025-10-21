@@ -27,10 +27,10 @@ router.get('/user/:ID_user', (req, res) =>{
 });
 
 router.post('/', (req, res) => {
-    const { ID_usuario, Matricula, Modelo, Tipo_vehiculo, Historial_cliente} = req.body;
+    const { ID_usuario, Matricula, Modelo, Tipo_vehiculo, year} = req.body;
     mysqlConnection.query(
-        'INSERT INTO vehiculo (ID_usuario, Matricula, Modelo, Tipo_vehiculo, Historial_cliente) VALUES (?, ?, ?, ?, ?)',
-        [ID_usuario, Matricula, Modelo, Tipo_vehiculo, Historial_cliente],
+        'INSERT INTO vehiculo (ID_usuario, Matricula, Modelo, Tipo_vehiculo, year) VALUES (?, ?, ?, ?, ? )',
+        [ID_usuario, Matricula, Modelo, Tipo_vehiculo, year ],
         (err) => {
             if (err) {
                 console.error('Error al agregar vehiculo', err);
@@ -44,10 +44,10 @@ router.post('/', (req, res) => {
 
 router.put('/:ID_vehiculo', (req, res) => {
     const { ID_vehiculo } = req.params;
-    const {Modelo, Tipo_vehiculo, Historial_cliente } = req.body;
+    const {Modelo, Tipo_vehiculo, year, Matricula} = req.body;
     mysqlConnection.query(
-        'UPDATE vehiculo SET Modelo=?, Tipo_vehiculo=?, Historial_cliente=? WHERE ID_vehiculo=?',
-        [Modelo, Tipo_vehiculo, Historial_cliente, ID_vehiculo],
+        'UPDATE vehiculo SET Modelo=?, Tipo_vehiculo=?, year=? WHERE Matricula=?',
+        [Modelo, Tipo_vehiculo, year, ID_vehiculo],
         (err) => {
             if (err) {
                 console.error('Error al actualizar vehiculo', err);
@@ -75,4 +75,4 @@ router.delete('/:ID_vehiculo', (req, res) => {
     );
 });
 
-module.exports = router;
+module.exports = router; 

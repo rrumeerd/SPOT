@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useUsuario } from "../../contextos/contextodeUsuario";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Logotipo from "../../componentes/visuales/logotipo";
 import './cliente.css';
 

@@ -7,17 +7,6 @@ function Saludo({ estilo }) {
   const [vehiculoFavorito, setVehiculoFavorito] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Si no hay datos del usuario, no mostrar nada
-  if (!DatosdeUsuario) {
-    return null;
-  }
-
-  // Cargar vehículo favorito para clientes
-  useEffect(() => {
-    if (TipodeUsuario === 'cliente' && DatosdeUsuario?.ID_usuario) {
-      cargarVehiculoFavorito();
-    }
-  }, [DatosdeUsuario?.ID_usuario, TipodeUsuario]);
 
   const cargarVehiculoFavorito = async () => {
     try {
@@ -37,6 +26,17 @@ function Saludo({ estilo }) {
     }
   };
 
+  useEffect(() => {
+    if (TipodeUsuario === 'cliente' && DatosdeUsuario?.ID_usuario) {
+      cargarVehiculoFavorito();
+    }
+  }, [DatosdeUsuario?.ID_usuario, TipodeUsuario]);
+
+  if (!DatosdeUsuario) {
+    return null
+  };
+
+  
   const NombredeUsuario = DatosdeUsuario.Nombre || DatosdeUsuario.fullName || DatosdeUsuario.NombredeNegocio || 'Usuario';
 
   if (TipodeUsuario === 'negocio') {
@@ -74,7 +74,6 @@ function Saludo({ estilo }) {
     );
   }
 
-  // Versión para clientes
   return (
     <div className="saludo-usuario" style={estilo}>
       <div className="saludo-header">

@@ -1,7 +1,7 @@
 import MenudeUsuario from "../../componentes/funcionales/menudeUsuario.jsx";
 import Logotipo from "../../componentes/visuales/logotipo.jsx";
 import MenuInferior from "../../componentes/funcionales/menuInferior.jsx";
-import MinimapControl from "../../componentes/funcionales/minimapa.jsx";
+import MinimapControl from "../../componentes/funcionales/cliente/minimapa.jsx";
 import './cliente.css';
 import { MapContainer, TileLayer } from 'react-leaflet'
 

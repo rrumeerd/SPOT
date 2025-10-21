@@ -1,3 +1,68 @@
+/* Base de Datos */
+.inicio-content > p {
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    letter-spacing: 1px;
+}
+
+.info-container {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin: 2rem 0;
+}
+
+.info-dato {
+    text-align: center;
+}
+
+.info-dato > img {
+    width: 80px;
+    margin-bottom: 0.5rem;
+}
+.info-dato > div {
+    font-size: 1.2rem;
+}
+
+.datos-box-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.7rem;
+}
+
+.datos-box-title > span {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+}
+
+.datos-box-title > img {
+    width: 28px;
+    margin-left: 0.7rem;
+}
+
+.datos-btn {
+    background: #7c3aed;
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.datos-btn-title {
+    font-size: 1.1rem;
+}
+
+.datos-btn-subtitle {
+    font-size: 0.95rem;
+    color: #e0e0e0;
+    margin-bottom: 0.3rem;
+}
+
+.datos-btn img {
+    width: 28px;
+}
 /* Pantallas de Registro */
 .registro-container {
     background: #2d1d3d;

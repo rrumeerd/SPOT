@@ -51,7 +51,7 @@ function MenudeUsuario() {
             <div className="usuario-info">
               <div className="usuario-nombre">
                 {DatosdeUsuario?.Nombre || DatosdeUsuario?.fullName || 
-                 (TipodeUsuario === 'negocio' ? 'Mi Negocio' : 'Usuario')}
+                 (TipodeUsuario === 'negocio' ? 'Mi Negocio' : 'cliente')}
               </div>
               <div className="tipo-de-usuario">
                 {TipodeUsuario === 'negocio' ? 'Cuenta empresarial' : 'Cuenta personal'}

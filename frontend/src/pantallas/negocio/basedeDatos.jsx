@@ -9,7 +9,6 @@ function BasedeDatos() {
   const navigate = useNavigate();
   const { TipodeUsuario } = useUsuario();
 
-  // Si no es un negocio, redirigir a la pantalla principal
   if (TipodeUsuario !== 'negocio') {
     navigate('/');
     return null;
@@ -25,116 +24,76 @@ function BasedeDatos() {
 
       <div className="inicio-content">
         <h1 className="inicio-title">BASE DE DATOS</h1>
-        <p style={{ fontSize: "1.1rem", color: "#e0e0e0", letterSpacing: "1px" }}>
+        <p>
           Gestión completa de clientes y servicios
         </p>
       </div>
 
-      {/* Estadísticas generales */}
-      <div style={{ display: "flex", justifyContent: "center", gap: "2.5rem", margin: "2rem 0" }}>
-        <div style={{ textAlign: "center" }}>
-          <img src="/recursos/iconos/usuario.png" alt="Clientes" style={{ width: 80, marginBottom: "0.5rem" }} />
-          <div style={{ fontSize: "1.3rem" }}>156</div>
-          <div style={{ fontSize: "1.1rem" }}>clientes totales</div>
+      <div className="info-container">
+        <div className="info-dato">
+          <img src="/recursos/iconos/usuario.png" alt="Clientes"/>
+          <div>156</div>
+          <div>clientes totales</div>
         </div>
-        <div style={{ textAlign: "center" }}>
-          <img src="/recursos/iconos/gas.png" alt="Servicios" style={{ width: 80, marginBottom: "0.5rem" }} />
-          <div style={{ fontSize: "1.3rem" }}>89</div>
-          <div style={{ fontSize: "1.1rem" }}>servicios este mes</div>
+        <div className="info-dato">
+          <img src="/recursos/iconos/gas.png" alt="Servicios"/>
+          <div>89</div>
+          <div>servicios este mes</div>
         </div>
-        <div style={{ textAlign: "center" }}>
-          <img src="/recursos/iconos/pago.png" alt="Ingresos" style={{ width: 80, marginBottom: "0.5rem" }} />
-          <div style={{ fontSize: "1.3rem" }}>$8.2M</div>
-          <div style={{ fontSize: "1.1rem" }}>ingresos totales</div>
+        <div className="info-dato">
+          <img src="/recursos/iconos/pago.png" alt="Ingresos"/>
+          <div>$8.2M</div>
+          <div>ingresos totales</div>
         </div>
       </div>
 
-      {/* Secciones de la base de datos */}
-      <div className="home-box">
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "0.7rem" }}>
-          <span style={{ fontSize: "1.3rem", letterSpacing: "1px" }}>GESTIÓN DE CLIENTES</span>
-          <img src="/recursos/iconos/usuario.png" alt="Clientes" style={{ width: 28, marginLeft: "0.7rem" }} />
+      <div className="inicio-box">
+        <div className="datos-box-title">
+          <span>GESTIÓN DE CLIENTES</span>
+          <img src="/recursos/iconos/usuario.png" alt="Clientes"/>
         </div>
-        <div style={{
-          background: "#7c3aed",
-          borderRadius: "10px",
-          padding: "1rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: "0.5rem"
-        }}>
+        <div className="datos-btn">
           <div>
-            <div style={{ fontSize: "1.1rem" }}>BUSCAR CLIENTE</div>
-            <div style={{ fontSize: "0.95rem", color: "#e0e0e0", marginBottom: "0.3rem" }}>Buscar por nombre, placa o documento</div>
+            <div className="datos-btn-title">BUSCAR CLIENTE</div>
+            <div className="datos-btn-subtitle">Buscar por nombre, placa o documento</div>
           </div>
-          <img src="/recursos/iconos/continuar.png" alt="Ver más" style={{ width: 28 }} />
+          <img src="/recursos/iconos/continuar.png" alt="Ver más"/>
         </div>
-        <div style={{
-          background: "#7c3aed",
-          borderRadius: "10px",
-          padding: "1rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: "0.5rem"
-        }}>
+        <div className="datos-btn">
           <div>
-            <div style={{ fontSize: "1.1rem" }}>HISTORIAL DE SERVICIOS</div>
-            <div style={{ fontSize: "0.95rem", color: "#e0e0e0", marginBottom: "0.3rem" }}>Ver todos los servicios realizados</div>
+            <div className="datos-btn-title">HISTORIAL DE SERVICIOS</div>
+            <div className="datos-btn-subtitle">Ver todos los servicios realizados</div>
           </div>
-          <img src="/recursos/iconos/continuar.png" alt="Ver más" style={{ width: 28 }} />
+          <img src="/recursos/iconos/continuar.png" alt="Ver más"/>
         </div>
-        <div style={{
-          background: "#7c3aed",
-          borderRadius: "10px",
-          padding: "1rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between"
-        }}>
+        <div className="datos-btn">
           <div>
-            <div style={{ fontSize: "1.1rem" }}>AGREGAR NUEVO CLIENTE</div>
-            <div style={{ fontSize: "0.95rem", color: "#e0e0e0", marginBottom: "0.3rem" }}>Registrar cliente en la base de datos</div>
+            <div className="datos-btn-title">AGREGAR NUEVO CLIENTE</div>
+            <div className="datos-btn-subtitle">Registrar cliente en la base de datos</div>
           </div>
           <img src="/recursos/iconos/continuar.png" alt="Ver más" style={{ width: 28 }} />
         </div>
       </div>
       <br/>
 
-      <div className="home-box">
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "0.7rem" }}>
-          <span style={{ fontSize: "1.3rem", letterSpacing: "1px" }}>REPORTES Y ANÁLISIS</span>
-          <img src="/recursos/iconos/lupa.png" alt="Reportes" style={{ width: 28, marginLeft: "0.7rem" }} />
+      <div className="inicio-box">
+        <div className="datos-box-title">
+          <span>REPORTES Y ANÁLISIS</span>
+          <img src="/recursos/iconos/lupa.png" alt="Reportes"/>
         </div>
-        <div style={{
-          background: "#7c3aed",
-          borderRadius: "10px",
-          padding: "1rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: "0.5rem"
-        }}>
+        <div className="datos-btn">
           <div>
-            <div style={{ fontSize: "1.1rem" }}>INGRESOS MENSUALES</div>
-            <div style={{ fontSize: "0.95rem", color: "#e0e0e0", marginBottom: "0.3rem" }}>Análisis de ingresos por período</div>
+            <div datos-btn-title>INGRESOS MENSUALES</div>
+            <div datos-btn-subtitle>Análisis de ingresos por período</div>
           </div>
-          <img src="/recursos/iconos/continuar.png" alt="Ver más" style={{ width: 28 }} />
+          <img src="/recursos/iconos/continuar.png" alt="Ver más"/>
         </div>
-        <div style={{
-          background: "#7c3aed",
-          borderRadius: "10px",
-          padding: "1rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between"
-        }}>
+        <div className="datos-btn">
           <div>
-            <div style={{ fontSize: "1.1rem" }}>SERVICIOS MÁS POPULARES</div>
-            <div style={{ fontSize: "0.95rem", color: "#e0e0e0", marginBottom: "0.3rem" }}>Estadísticas de servicios solicitados</div>
+            <div className="datos-btn-title">SERVICIOS MÁS POPULARES</div>
+            <div className="datos-btn-subtitle">Estadísticas de servicios solicitados</div>
           </div>
-          <img src="/recursos/iconos/continuar.png" alt="Ver más" style={{ width: 28 }} />
+          <img src="/recursos/iconos/continuar.png" alt="Ver más"/>
         </div>
       </div>
 
