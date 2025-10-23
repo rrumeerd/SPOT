@@ -2,9 +2,9 @@ const {Router} = require('express');
 const router = Router();
 const mysqlConnection = require('../db');
 
-router.get('/:ID_vehiculo', (req, res) =>{
-    const {ID_vehiculo} = req.params;
-    mysqlConnection.query(`SELECT * FROM vehiculo WHERE ID_vehiculo=?`, [ID_vehiculo], (err, rows, fields) => {
+router.get('/:id', (req, res) =>{
+    const {id} = req.params;
+    mysqlConnection.query(`SELECT * FROM vehiculo WHERE id=?`, [id], (err, rows, fields) => {
         if (err) {
             console.error('Error en la consulta', err);
             res.status(500).json({error: 'Hubo un error al mostrar el vehiculo', detalle:err});
@@ -42,12 +42,12 @@ router.post('/', (req, res) => {
     );
 });
 
-router.put('/:ID_vehiculo', (req, res) => {
-    const { ID_vehiculo } = req.params;
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
     const {Modelo, Tipo_vehiculo, year, Matricula} = req.body;
     mysqlConnection.query(
-        'UPDATE vehiculo SET Modelo=?, Tipo_vehiculo=?, year=? WHERE Matricula=?',
-        [Modelo, Tipo_vehiculo, year, ID_vehiculo],
+        'UPDATE vehiculo SET Modelo=?, Tipo_vehiculo=?, year=? WHERE id=?',
+        [Modelo, Tipo_vehiculo, year, id],
         (err) => {
             if (err) {
                 console.error('Error al actualizar vehiculo', err);
@@ -59,11 +59,11 @@ router.put('/:ID_vehiculo', (req, res) => {
     );
 });
 
-router.delete('/:ID_vehiculo', (req, res) => {
-    const { ID_vehiculo } = req.params;
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
     mysqlConnection.query(
-        'DELETE FROM vehiculo WHERE ID_vehiculo=?',
-        [ID_vehiculo],
+        'DELETE FROM vehiculo WHERE id=?',
+        [id],
         (err, result) => {
             if (err) {
                 console.error('Error al eliminar vehiculo', err);

@@ -37,7 +37,7 @@ router.get('/usuario/:ID_usuario', (req, res) =>{
             ts.Nombre_servicio as Servicio_Nombre,
             ts.Tarifa as Servicio_Tarifa
         FROM historial_cliente hc
-        LEFT JOIN vehiculo v ON hc.ID_vehiculo = v.ID_vehiculo
+        LEFT JOIN vehiculo v ON hc.ID_vehiculo = v.id
         LEFT JOIN negocio n ON hc.ID_negocio = n.ID_negocio
         LEFT JOIN tipo_servicio ts ON hc.ID_servicio = ts.ID_servicio
         WHERE hc.ID_usuario = ? 
