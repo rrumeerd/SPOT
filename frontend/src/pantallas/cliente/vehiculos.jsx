@@ -5,6 +5,7 @@ import FormulariodeVehiculo from "../../componentes/funcionales/cliente/formular
 import { useState, useEffect } from "react";
 import { useUsuario } from "../../contextos/contextodeUsuario.jsx";
 import { useNavigate } from "react-router-dom";
+import getBackendUrl from "../../utils/backendUrl.js";
 import './cliente.css';
 
 function Vehiculos() {
@@ -23,7 +24,7 @@ function Vehiculos() {
   const cargarVehiculos = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:4000/vehiculos/user/${DatosdeUsuario.ID_usuario}`);
+      const response = await fetch(`${getBackendUrl()}/vehiculos/user/${DatosdeUsuario.ID_usuario}`);
       if (response.ok) {
         const vehiculosData = await response.json();
         setVehiculos(vehiculosData);

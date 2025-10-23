@@ -6,6 +6,7 @@ import MenuInferior from "../../componentes/funcionales/menuInferior";
 import MenudeUsuario from "../../componentes/funcionales/menudeUsuario";
 import Logotipo from "../../componentes/visuales/logotipo";
 import Volver from "../../componentes/funcionales/botones/volver";
+import getBackendUrl from "../../../utils/backendUrl.js";
 import './cliente.css';
 
 function Movimientos() {
@@ -25,7 +26,7 @@ function Movimientos() {
             setLoading(true);
             
             // Cargar historial del cliente específico del usuario con información completa
-            const historialResponse = await fetch(`http://localhost:4000/historiales-cliente/usuario/${DatosdeUsuario.ID_usuario}`);
+            const historialResponse = await fetch(`${getBackendUrl()}/historiales-cliente/usuario/${DatosdeUsuario.ID_usuario}`);
             const movimientosUsuario = await historialResponse.json();
             
             setMovimientos(movimientosUsuario);

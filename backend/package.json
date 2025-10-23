@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build": "echo \"Backend listo para Vercel (sin paso de build)\"",
+    "vercel-build": "npm run build"
   },
   "keywords": [],
   "author": "",

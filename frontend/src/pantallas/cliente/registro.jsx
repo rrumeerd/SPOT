@@ -3,6 +3,7 @@ import { useUsuario } from "../../contextos/contextodeUsuario";
 import { useState } from "react";
 import Logotipo from "../../componentes/visuales/logotipo";
 import FormulariodeVehiculo from "../../componentes/funcionales/cliente/formulariodeVehiculo";
+import getBackendUrl from "../../utils/backendUrl.js";
 import './cliente.css';
 
 function RegistrodeCliente() {
@@ -65,7 +66,7 @@ function RegistrodeCliente() {
     updateDatosdeUsuario(DatosdeUsuario);
     updateTipodeUsuario('cliente');
     try {
-      const response = await fetch('http://localhost:4000/usuarios', {
+      const response = await fetch(`${getBackendUrl()}/usuarios`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -94,7 +95,7 @@ function RegistrodeCliente() {
       // Ahora registrar el vehículo en la base de datos
       if (InformaciondeVehiculo.brand && InformaciondeVehiculo.plate) {
         try {
-          const vehiculoResponse = await fetch('http://localhost:4000/vehiculos', {
+          const vehiculoResponse = await fetch(`${getBackendUrl()}/vehiculos`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json; charset=UTF-8',

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useUsuario } from "../../contextos/contextodeUsuario";
+import getBackendUrl from "../../utils/backendUrl.js";
 import './funcionales.css';
 
 function Saludo({ estilo }) {
@@ -11,7 +12,7 @@ function Saludo({ estilo }) {
   const cargarVehiculoFavorito = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:4000/vehiculos/user/${DatosdeUsuario.ID_usuario}`);
+      const response = await fetch(`${getBackendUrl()}/vehiculos/user/${DatosdeUsuario.ID_usuario}`);
       if (response.ok) {
         const vehiculos = await response.json();
         // Tomar el primer vehículo como favorito (o implementar lógica más sofisticada)
