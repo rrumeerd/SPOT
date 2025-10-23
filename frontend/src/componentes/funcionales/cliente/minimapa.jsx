@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react';
-import { MapContainer, TileLayer, Rectangle, useMap, useMapEvent, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Rectangle, useMap, useMapEvent, /*useMapEvents*/ } from 'react-leaflet';
 
 const POSITION_CLASSES = {
   bottomleft: 'leaflet-bottom leaflet-left',
