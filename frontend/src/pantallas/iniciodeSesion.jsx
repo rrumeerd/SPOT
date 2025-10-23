@@ -3,6 +3,7 @@ import { useUsuario } from "../contextos/contextodeUsuario.jsx";
 import { useState } from "react";
 import Logotipo from "../componentes/visuales/logotipo.jsx";
 import Volver from "../componentes/funcionales/botones/volver.jsx";
+import getBackendUrl from "../utils/backendUrl.js";
 import './pantallas.css';
 
 function IniciodeSesion() {
@@ -32,7 +33,7 @@ function IniciodeSesion() {
     setErrorMessage('');
 
     try {
-      const response = await fetch('http://localhost:4000/usuarios/login', {
+      const response = await fetch(`${getBackendUrl()}/usuarios/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',

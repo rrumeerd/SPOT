@@ -3,6 +3,7 @@ import MenudeUsuario from "../../componentes/funcionales/menudeUsuario.jsx";
 import MenuInferior from "../../componentes/funcionales/menuInferior.jsx";
 import { useUsuario } from "../../contextos/contextodeUsuario.jsx";
 import { useState, useEffect } from "react";
+import getBackendUrl from "../../utils/backendUrl.js";
 import './cliente.css';
 
 function PerfildeCliente() {
@@ -21,7 +22,7 @@ function PerfildeCliente() {
   const cargarVehiculoFavorito = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:4000/vehiculos/user/${DatosdeUsuario.ID_usuario}`);
+      const response = await fetch(`${getBackendUrl()}/vehiculos/user/${DatosdeUsuario.ID_usuario}`);
       if (response.ok) {
         const vehiculos = await response.json();
         if (vehiculos.length > 0) {

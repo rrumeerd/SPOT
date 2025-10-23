@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useUsuario } from "../../../contextos/contextodeUsuario.jsx";
+import getBackendUrl from "../../../utils/backendUrl.js";
 import './cliente.css';
 
 function FormulariodeVehiculo({ onClose, vehiculoEdit = null, onSave, onDelete = null, isRegistration = false, vehiculoData = null }) {
@@ -113,7 +114,7 @@ function FormulariodeVehiculo({ onClose, vehiculoEdit = null, onSave, onDelete =
         onClose();
       } else if (vehiculoEdit) {
         // Actualizar vehículo existente
-        const response = await fetch(`http://localhost:4000/vehiculos/${vehiculoEdit.id}`, {
+        const response = await fetch(`${getBackendUrl()}/vehiculos/${vehiculoEdit.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -134,7 +135,7 @@ function FormulariodeVehiculo({ onClose, vehiculoEdit = null, onSave, onDelete =
         }
       } else {
         // Crear nuevo vehículo
-        const response = await fetch('http://localhost:4000/vehiculos', {
+        const response = await fetch(`${getBackendUrl()}/vehiculos`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -169,7 +170,7 @@ function FormulariodeVehiculo({ onClose, vehiculoEdit = null, onSave, onDelete =
     if (!confirmed) return;
     
     try {
-      const response = await fetch(`http://localhost:4000/vehiculos/${vehiculoEdit.id}`, {
+      const response = await fetch(`${getBackendUrl()}/vehiculos/${vehiculoEdit.id}`, {
         method: 'DELETE',
       });
 
