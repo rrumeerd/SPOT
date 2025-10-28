@@ -39,7 +39,7 @@ function PerfildeCliente() {
   const vehiculoFav = (() => {
     if (loading) return 'Cargando...';
     if (!vehiculoFavorito) return 'Sin vehículo registrado';
-    return `${vehiculoFavorito.Modelo} - ${vehiculoFavorito.Matricula}`;
+    return `${vehiculoFavorito.marca} ${vehiculoFavorito.Modelo} - ${vehiculoFavorito.Matricula}`;
   })();
   return (
     <div className="usuario-container">
