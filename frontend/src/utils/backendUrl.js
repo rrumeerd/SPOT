@@ -1,6 +1,3 @@
-// Ajusta este fallback si aún no configuras REACT_APP_BACKEND_URL en Vercel
-const DEFAULT_PROD_BACKEND_URL = 'https://TU-API-BACKEND.com';
-
 const getBackendUrl = () => {
   const isDevelopment = process.env.NODE_ENV === 'development' || 
                        window.location.hostname === 'localhost' || 
@@ -30,11 +27,9 @@ const getBackendUrl = () => {
     console.log('========================');
     return 'http://localhost:4000';
   } else {
-    // En producción, si no hay variable, usar un backend dedicado (no el dominio del frontend)
-    const finalUrl = DEFAULT_PROD_BACKEND_URL.endsWith('/') ? DEFAULT_PROD_BACKEND_URL.slice(0, -1) : DEFAULT_PROD_BACKEND_URL;
-    console.warn('REACT_APP_BACKEND_URL no definida en producción. Usando DEFAULT_PROD_BACKEND_URL:', finalUrl);
+    console.log('Modo producción detectado, usando URL de Vercel');
     console.log('========================');
-    return finalUrl;
+    return 'https://spot-6sfq.vercel.app';
   }
 };
 

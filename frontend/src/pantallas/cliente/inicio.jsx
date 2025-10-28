@@ -22,29 +22,13 @@ function IniciodeCliente() {
 
             <Saludo />
 
-            <div className="inicio-cliente-datos">
-                <div>
-                    <img src="/recursos/iconos/velocidad.png" alt="Tiempo de Parqueo" />
-                    <div>134.6 horas</div>
-                    <div>aparcado</div>
-                </div>
-                <div>
-                    <img src="/recursos/iconos/gas.png" alt="Tanqueos" />
-                    <div>340.4 galones</div>
-                    <div>tanqueados</div>
-                </div>
-            </div>
-
             <div className="inicio-box" onClick={irAMovimientos} style={{cursor: 'pointer'}}>
                 <div className="inicio-box-header">
                     <span>TUS ÚLTIMOS MOVIMIENTOS</span>
                     <img src="/recursos/iconos/pago.png" alt="Movimientos" />
                 </div>
                 <div className="inicio-cliente-movimiento">
-                    Transferiste <b>($210.000)</b> a Juan Escobar
-                </div>
-                <div className="inicio-cliente-movimiento">
-                    Tanqueaste 5 galones de gasolina en tu<b> YAMAHA NMAX 115 </b>en Bomba La Maria exitosamente.
+                    Aún no tienes movimientos recientes.
                     <button className="continuar-btn" onClick={irAMovimientos}>
                         <img src="/recursos/iconos/continuar.png" alt="Ver más" />
                     </button>

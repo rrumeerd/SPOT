@@ -6,6 +6,7 @@ import { ProveedordeUsuario } from './contextos/contextodeUsuario';
 /* CLiente */
 import Mapa from './pantallas/cliente/mapa';
 import Vehiculos from './pantallas/cliente/vehiculos';
+import Movimientos from './pantallas/cliente/movimientos';
 
 /* Compartidas */
 import Registro from './pantallas/registro';
@@ -32,6 +33,7 @@ function App() {
           <Ruta path='/mapa' element={<Mapa />}></Ruta>
           <Ruta path='/basededatos' element={<BasedeDatos />}></Ruta>
           <Ruta path='/vehiculos' element={<Vehiculos />}></Ruta>
+          <Ruta path='/movimientos' element={<Movimientos />}></Ruta>
           <Ruta path='/perfil' element={<Perfil />}></Ruta>
           <Ruta path='/configuracion' element={<Configuracion />}></Ruta>
           <Ruta path='/soporte' element={<Soporte />}></Ruta>
