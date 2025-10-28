@@ -280,8 +280,8 @@
     background: #8025ff25;
     border-radius: 16px;
     padding: 1.2rem;
-    margin: 1rem auto;
-    max-width: 95%;
+    width: 75%;
+    border: 1px solid rgba(124, 58, 237, 0.3);
 }
 
 .inicio-box>div {
@@ -344,6 +344,7 @@
     font-size: 1rem;
     color: #e0e0e0;
     margin-bottom: 0.5rem;
+    padding: 0rem 1rem 0rem 1rem;
 }
 
 .inicio-cliente-movimiento>button {

@@ -91,6 +91,12 @@ function RegistrodeCliente() {
 
       const data = await response.json();
       console.log('Usuario creado:', data);
+
+      // Actualizar contexto con el ID retornado por el backend
+      updateDatosdeUsuario((prev) => ({
+        ...prev,
+        ID_usuario: data.userID,
+      }));
       
       // Ahora registrar el vehículo en la base de datos
       if (InformaciondeVehiculo.brand && InformaciondeVehiculo.plate) {
@@ -113,7 +119,8 @@ function RegistrodeCliente() {
             const vehiculoData = await vehiculoResponse.json();
             console.log('Vehículo registrado:', vehiculoData);
           } else {
-            console.error('Error al registrar vehículo');
+            const errText = await vehiculoResponse.text();
+            console.error('Error al registrar vehículo:', errText);
           }
         } catch (vehiculoError) {
           console.error('Error al registrar vehículo:', vehiculoError);
