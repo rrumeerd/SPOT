@@ -20,7 +20,6 @@ function IniciodeSesion() {
       ...prev,
       [field]: value
     }));
-    // Limpiar mensaje de error cuando el usuario empiece a escribir
     if (errorMessage) {
       setErrorMessage('');
     }
@@ -29,7 +28,6 @@ function IniciodeSesion() {
   const handleEnviar = async (e) => {
     e.preventDefault();
 
-    // Limpiar mensaje de error anterior
     setErrorMessage('');
 
     try {
@@ -46,7 +44,11 @@ function IniciodeSesion() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        if (errorData.error === 'correo_no_existe' || errorData.error === 'contraseña_incorrecta') {
+        if (
+          errorData.error === 'correo_no_existe' ||
+          errorData.error === 'contrasena_incorrecta' ||
+          errorData.error === 'contraseña_incorrecta'
+        ) {
           setErrorMessage(errorData.mensaje);
           return;
         }
@@ -55,7 +57,6 @@ function IniciodeSesion() {
 
       const data = await response.json();
       
-      // Actualizar el contexto con los datos del usuario
       const DatosdeUsuario = {
         ID_usuario: data.usuario.ID_usuario,
         email: data.usuario.Correo,
@@ -71,7 +72,7 @@ function IniciodeSesion() {
       navigate('/inicio');
     } catch (error) {
       console.error('Error en login:', error);
-      setErrorMessage('Error de conexión. Intenta nuevamente.');
+      setErrorMessage('Error de conexión, intenta nuevamente.');
     }
   };
 
