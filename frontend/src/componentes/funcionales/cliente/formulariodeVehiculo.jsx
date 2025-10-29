@@ -120,10 +120,11 @@ function FormulariodeVehiculo({ onClose, vehiculoEdit = null, onSave, onDelete =
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            Modelo: `${datosdeFormulario.marca} ${datosdeFormulario.modelo}`,
+            Alias: datosdeFormulario.alias,
+            Marca: datosdeFormulario.marca,
+            Modelo: datosdeFormulario.modelo,
             Tipo_vehiculo: datosdeFormulario.tipo,
             year: datosdeFormulario.ano,
-            Matricula: datosdeFormulario.placa,
           }),
         });
 
@@ -142,8 +143,10 @@ function FormulariodeVehiculo({ onClose, vehiculoEdit = null, onSave, onDelete =
           },
           body: JSON.stringify({
             ID_usuario: DatosdeUsuario.ID_usuario,
+            Alias: datosdeFormulario.alias,
             Matricula: datosdeFormulario.placa,
-            Modelo: `${datosdeFormulario.marca} ${datosdeFormulario.modelo}`,
+            Marca: datosdeFormulario.marca,
+            Modelo: datosdeFormulario.modelo,
             Tipo_vehiculo: datosdeFormulario.tipo,
             year: datosdeFormulario.ano
           }),
