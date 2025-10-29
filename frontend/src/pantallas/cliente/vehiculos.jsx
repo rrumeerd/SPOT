@@ -88,7 +88,7 @@ function Vehiculos() {
           ) : (
             vehiculos.map((v) => {
               // Extraer información del modelo y historial
-              const modeloCompleto = v.Modelo || '';
+              const modeloCompleto = v.modelo || '';
               const partes = modeloCompleto.split(' ');
               const brand = partes[0] || '';
               const model = partes.slice(1).join(' ') || '';
@@ -117,10 +117,10 @@ function Vehiculos() {
                     </button>
                   </div>
                   <div className="vehiculos-card-body">
-                    <div className="vehiculos-card-title">{alias || modeloCompleto}</div>
+                    <div className="vehiculos-card-title">{v.alias}</div>
                     <div className="vehiculos-card-row"><span>Placa:</span> <strong>{v.Matricula}</strong></div>
-                    <div className="vehiculos-card-row"><span>Marca:</span> <strong>{brand}</strong></div>
-                    <div className="vehiculos-card-row"><span>Modelo:</span> <strong>{model}</strong></div>
+                    <div className="vehiculos-card-row"><span>Marca:</span> <strong>{v.marca}</strong></div>
+                    <div className="vehiculos-card-row"><span>Modelo:</span> <strong>{v.modelo}</strong></div>
                     <div className="vehiculos-card-row"><span>Año:</span> <strong>{v.year}</strong></div>
                   </div>
                 </div>
